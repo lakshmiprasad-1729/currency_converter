@@ -1,7 +1,7 @@
 import "./index.css";
 import InputBox from "./components/InputBox";
 
-function App() {
+export default function App() {
     
 
   return (
