@@ -1,7 +1,7 @@
 import "./index.css";
 import InputBox from "./components/InputBox";
 import useCurrencyInfo from "./hooks/useCurrencyInfo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function App() {
     const [amount,setAmount]=useState(0);
@@ -22,6 +22,9 @@ export default function App() {
         setAmount(changedAmount);
         setChangedAmount(amount);
     }
+    useEffect(()=>{
+        setChangedAmount(amount*currencyInfo[to])
+    },[amount])
     
   return (
       <div
@@ -46,6 +49,7 @@ export default function App() {
                               onAmountChange={(amount)=>{setAmount(amount)}}
                               selectCurrency={from}
                               onCurrencyChange={(from)=>{setFrom(from)}}
+                              liveConverter={convert}
                           />
                       </div>
                       <div className="relative w-full h-0.5">
@@ -67,9 +71,9 @@ export default function App() {
                               onCurrencyChange={(to)=>setTo(to)}
                           />
                       </div>
-                      <button      onClick={convert} type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg">
+                      {/* <button      onClick={convert} type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg">
                           Convert from {from.toUpperCase()} to {to.toUpperCase()}
-                      </button>
+                      </button> */}
                   </form>
               </div>
           </div>

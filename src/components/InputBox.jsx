@@ -1,12 +1,14 @@
+/* eslint-disable react/prop-types */
 
-function InputBox({
+export default function InputBox({
       label,//forchanging from to to or viceversa
       onAmountChange,//state to react on change of amount 
       onCurrencyChange,//state to react on change fof type of currency
       currencyOptions=[],
-      setCurrency,
+      selectCurrency,
       amount,
-      amountDisable
+      amountDisable,
+      liveConverter
 }) {
 
     return (
@@ -24,13 +26,14 @@ function InputBox({
                     placeholder="Amount"
                     disabled={amountDisable}
                     onChange={(e)=>onAmountChange && onAmountChange(Number(e.target.value))}
+                    onClick={liveConverter}
                 />
             </div>
             <div className="w-1/2 flex flex-wrap justify-end text-right">
                 <p className="text-black/40 mb-2 w-full">Currency Type</p>
                 <select
                     className="rounded-lg px-1 py-1 bg-gray-100 cursor-pointer outline-none"
-                    value={setCurrency}
+                    value={selectCurrency}
                     onChange={(e)=>onCurrencyChange&&onCurrencyChange(e.target.value)}
                 >
                     {currencyOptions.map((currency) => (
@@ -44,4 +47,4 @@ function InputBox({
     );
 }
 
-export default InputBox;
+
