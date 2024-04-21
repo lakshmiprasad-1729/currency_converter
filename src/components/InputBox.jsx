@@ -1,12 +1,12 @@
-import React, { useId, useState } from 'react'
 
 function InputBox({
       label,//forchanging from to to or viceversa
       onAmountChange,//state to react on change of amount 
       onCurrencyChange,//state to react on change fof type of currency
-      CurrencyOptions,
+      currencyOptions=[],
       setCurrency,
-      amount
+      amount,
+      amountDisable
 }) {
 
     return (
@@ -20,7 +20,9 @@ function InputBox({
                     className="outline-none w-full bg-transparent py-1.5"
                     type="number"
                     value={amount}
+                    min={0}
                     placeholder="Amount"
+                    disabled={amountDisable}
                     onChange={(e)=>onAmountChange && onAmountChange(Number(e.target.value))}
                 />
             </div>
@@ -31,9 +33,11 @@ function InputBox({
                     value={setCurrency}
                     onChange={(e)=>onCurrencyChange&&onCurrencyChange(e.target.value)}
                 >
-                    
-                        <option value="usd">usd</option>
- 
+                    {currencyOptions.map((currency) => (
+                            <option key={currency} value={currency}>
+                            {currency}
+                            </option>
+                        ))} 
                 </select>
             </div>
         </div>
